@@ -62,17 +62,6 @@ extern "system" fn hook_callback(code: i32, wparam: usize, lparam: isize) -> isi
         }
     }
 
-    unsafe {
-        if CTRL_DOWN && ALT_DOWN && F4_DOWN {
-            println!("Time to kill!");
-            // get foreground window
-            // kill that id
-            
-
-            // prevent this keypress from being propagated
-            return 1;
-        }
-    }
     
     // this can be neater but cba
     if wparam == WM_KEYUP as usize {
@@ -99,6 +88,17 @@ extern "system" fn hook_callback(code: i32, wparam: usize, lparam: isize) -> isi
             if is_f4 {
                 F4_DOWN = false
             }
+        }
+    }
+    unsafe {
+        if CTRL_DOWN && ALT_DOWN && F4_DOWN {
+            println!("Time to kill!");
+            // get foreground window
+            // kill that id
+            
+
+            // prevent this keypress from being propagated
+            return 1;
         }
     }
 
